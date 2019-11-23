@@ -6,7 +6,7 @@ server.use(express.json());
 
 
 server.get('/',(req,res) => {
-    res.send("<h1>Karen's Sprint Test</h1>")
+    res.send("<h1>node-db-challenge</h1>")
   })
 
 
