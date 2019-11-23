@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
     });
   });
 
+  //----------------------------------------------------------------
 
   router.get('/:id', (req, res) => {
     const { id } = req.params;
@@ -26,10 +27,12 @@ router.get('/', (req, res) => {
       res.status(404).json({ message: 'Could not find tasks with given id.' })
     }
   })
-  .catch(err => {
-    res.status(500).json({ message: 'Failed to get tasks' });
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to get tasks' });
+   });
   });
-  });
+
+  //------------------------------------------------------------------
 
   router.post('/', (req, res) => {
     const taskData = req.body;
@@ -42,5 +45,20 @@ router.get('/', (req, res) => {
       res.status(500).json({ message: 'Failed to create new task' });
     });
   });
+
+  //------------------------------------------------------------------
+
+
+  router.get('/:id/projects', (req,res) => {
+    const{id} = req.params
+   Tasks.findprojects(id)
+    .then(projects => {
+            res.status(200).json(projects)
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).json({message: 'Database error'})
+          })
+  })
 
   module.exports = router;
