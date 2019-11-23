@@ -31,4 +31,16 @@ router.get('/', (req, res) => {
   });
   });
 
+  router.post('/', (req, res) => {
+    const taskData = req.body;
+  
+   Tasks.add(taskData)
+    .then(newtask => {
+      res.status(201).json(newtask);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to create new task' });
+    });
+  });
+
   module.exports = router;
