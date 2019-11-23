@@ -40,10 +40,14 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+    Relational Databases is the database software itself, which manages storage, querying, updating among other things.
+    SQL is a language which is typically used to interact with the Relational Database system. 
 
 //------------------------------------------------------------------------------
 
 - [ ] Why do tables need a `primary key`?
+
+    Tables need a primary key as a constraint that uniquely identifies each record in the table.
 
 //------------------------------------------------------------------------------
 
@@ -54,6 +58,8 @@ Demonstrate your understanding of this week's concepts by answering the followin
 //------------------------------------------------------------------------------
 
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
+
+    A many-to-many relationship occurs when multiple records in a table are associated with ultiple records in another table.
 
 //---------------------------------------------------------------------------------
 
