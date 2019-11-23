@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/kly001/node-db-challenge#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.20.2",
+    "sqlite3": "^4.1.0"
   }
 }
