@@ -4,7 +4,8 @@ module.exports = {
     find,
     findById,
     add,
-    findProjects
+    update,
+    remove
     
 }
 
@@ -13,7 +14,9 @@ function find() {
 }
 
 function findById(id) {
-    return db('tasks').where({id}).first();
+    return db('tasks')
+    .where({id})
+    .first();
 }
 
 function add(task) {
@@ -23,9 +26,13 @@ function add(task) {
     })
 }
 
-function findProjects(task_id) {
-    return db('projects as p')
-    .join('tasks as t', 't.id', 'p.project_id')
-    .select('p.project_name','p.project_description','t.task_description')
-    .where({task_id})
+function update(changes,id) {
+    return db('tasks').where({id}).update(changes)
+    .then(count => {
+        return findById(id)
+    })
+}
+
+function remove(id) {
+    return db('tasks').where({id}).del()
 }

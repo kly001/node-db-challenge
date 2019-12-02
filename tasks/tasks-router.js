@@ -4,16 +4,27 @@ const Tasks = require('./tasks-model.js');
 
 const router = express.Router();
 
+// router.get('/', (req, res) => {
+//     // get all tasks from the database
+//     Tasks.find()
+//     .then(tasks => {
+//       res.status(200).json(tasks);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+//   });
 router.get('/', (req, res) => {
-    // get all tasksfrom the database
-    Tasks.find()
-    .then(tasks => {
-      res.status(200).json(tasks);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
+  // get all tasks from the database
+  Tasks.find()
+  .then(tasks => {
+    res.status(200).json(tasks);
+  })
+  .catch(error => {
+    res.status(500).json(error);
   });
+});
+
 
   //----------------------------------------------------------------
 
@@ -32,6 +43,8 @@ router.get('/', (req, res) => {
    });
   });
 
+  
+
   //------------------------------------------------------------------
 
   router.post('/', (req, res) => {
@@ -48,17 +61,39 @@ router.get('/', (req, res) => {
 
   //------------------------------------------------------------------
 
+  router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+  
+    Tasks.update(changes,id)
+    .then(task => {
+      if (task) {
+        res.json({ update: task });
+      } else {
+        res.status(404).json({ message: 'Could not find task with given id' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to update task' });
+    });
+  });
 
-  router.get('/:id/projects', (req,res) => {
-    const{id} = req.params
-   Tasks.findprojects(id)
-    .then(projects => {
-            res.status(200).json(projects)
-          })
-          .catch(err => {
-            console.log(err);
-            res.status(500).json({message: 'Database error'})
-          })
-  })
+  //-------------------------------------------------------------------
+  
+  router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+  
+    Tasks.remove(id)
+    .then(count => {
+      if (count) {
+        res.json({ removed: count });
+      } else {
+        res.status(404).json({ message: 'Could not find task with given id' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to delete task' });
+    });
+  });
 
   module.exports = router;

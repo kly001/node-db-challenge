@@ -43,4 +43,38 @@ router.get('/', (req, res) => {
     });
   });
 
+  router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+  
+    Projects.update(changes,id)
+    .then(project => {
+      if (project) {
+        res.json({ update: project });
+      } else {
+        res.status(404).json({ message: 'Could not find project with given id' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to update project'});
+    });
+  });
+  
+  router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+  
+    Projects.remove(id)
+    .then(count => {
+      if (count) {
+        res.json({ removed: count });
+      } else {
+        res.status(404).json({ message: 'Could not find project with given id' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to delete project' });
+    });
+  });
+
+ 
   module.exports = router;

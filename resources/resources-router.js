@@ -43,4 +43,38 @@ router.get('/', (req, res) => {
     });
   });
 
+  router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+  
+    Resources.update(changes,id)
+    .then(resource => {
+      if (resource) {
+        res.json({ update: resource });
+      } else {
+        res.status(404).json({ message: 'Could not find resource with given id' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to update resource'});
+    });
+  });
+  
+  router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+  
+    Resources.remove(id)
+    .then(count => {
+      if (count) {
+        res.json({ removed: count });
+      } else {
+        res.status(404).json({ message: 'Could not find resource with given id' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to delete resource' });
+    });
+  });
+
+
   module.exports = router;
