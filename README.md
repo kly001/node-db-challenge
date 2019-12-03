@@ -59,7 +59,7 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
 
-    A many-to-many relationship occurs when multiple records in a table are associated with ultiple records in another table.
+    A many-to-many relationship occurs when multiple records in one table are associated with multiple records in another table.
 
 //---------------------------------------------------------------------------------
 

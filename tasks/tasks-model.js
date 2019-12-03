@@ -10,14 +10,22 @@ module.exports = {
 }
 
 function find() {
-    return db('tasks');
+    return db('tasks')
 }
 
+// function findById(id) {
+//     return db('tasks')
+//     .where({id})
+//     .first()
+//     }
+
 function findById(id) {
-    return db('tasks')
-    .where({id})
-    .first();
+    return db('projects as p')
+    .join('tasks as t','t.project_id', 'p.id')
+    .select('t.id as TaskId','t.task_description',"t.completed as Completed",'p.project_name','p.project_description')
+    .where({TaskId:id})
 }
+
 
 function add(task) {
     return db('tasks').insert(task)

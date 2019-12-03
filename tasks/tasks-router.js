@@ -4,18 +4,10 @@ const Tasks = require('./tasks-model.js');
 
 const router = express.Router();
 
-// router.get('/', (req, res) => {
-//     // get all tasks from the database
-//     Tasks.find()
-//     .then(tasks => {
-//       res.status(200).json(tasks);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
-//   });
+
 router.get('/', (req, res) => {
   // get all tasks from the database
+  //include project name
   Tasks.find()
   .then(tasks => {
     res.status(200).json(tasks);
@@ -31,15 +23,15 @@ router.get('/', (req, res) => {
   router.get('/:id', (req, res) => {
     const { id } = req.params;
   Tasks.findById(id)
-  .then(tasks => {
-    if (tasks) {
-      res.json(tasks);
+  .then(task => {
+    if (task) {
+      res.json(task);
     } else {
       res.status(404).json({ message: 'Could not find tasks with given id.' })
     }
   })
     .catch(err => {
-      res.status(500).json({ message: 'Failed to get tasks' });
+      res.status(500).json({ message: 'Failed to get task' });
    });
   });
 
